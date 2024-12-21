@@ -60,14 +60,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-# app.add_middleware(
-#     CORSMiddleware,  # FastAPI에서 CORS 처리를 위해 사용하는 미들웨어
-#     allow_origins=["http://localhost:3000"],  # 허용할 출처(origin). React 앱이 실행되는 주소
-#     allow_credentials=True,  # 쿠키나 인증 정보를 함께 보낼 수 있도록 허용
-#     allow_methods=["*"],  # 모든 HTTP 메서드(GET, POST, PUT, DELETE 등)를 허용
-#     allow_headers=["*"],  # 모든 HTTP 헤더를 허용
-# )
-
 
 ROOT_URLCONF = 'backend.urls'
 
