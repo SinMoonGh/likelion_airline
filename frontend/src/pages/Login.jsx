@@ -53,7 +53,7 @@ export default function Login() {
     };
 
     try {
-      const response = await axiosInstance.post('/login', credentials);
+      const response = await axiosInstance.post('/api/v1/user/login', credentials);
       const { token, user } = response.data;
       login(user, token);
       toast.success('로그인 성공!');
@@ -61,7 +61,7 @@ export default function Login() {
     } catch (error) {
       toast.error(
         '로그인 실패: ' + error.response?.data?.message ||
-          '알 수 없는 오류가 발생했습니다.'
+        '알 수 없는 오류가 발생했습니다.'
       );
     }
   };
