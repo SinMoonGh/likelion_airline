@@ -24,7 +24,7 @@ export const FlightInfoProvider = ({ children }) => {
   const fetchFlights = useCallback(
     async (page = 1, limit = 6, params = {}) => {
       try {
-        const response = await axiosInstance.get('/flights', {
+        const response = await axiosInstance.get('/api/v1/flights/flights', {
           headers: {
             Authorization: `Bearer ${authState.token}`,
           },
