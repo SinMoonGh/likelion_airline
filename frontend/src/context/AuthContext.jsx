@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     if (token && user) {
       setAuthState({
         isAuthenticated: true,
-        user: user, 
+        user: user,
         token: token,
       });
     }
@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    // 오류 x
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuthState({

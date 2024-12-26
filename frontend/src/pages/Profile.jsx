@@ -47,14 +47,15 @@ const Profile = () => {
   const uid = authState.user;
 
   const handleDeleteAccount = async () => {
+    console.log(`/api/v1/user/delete/${uid}`);
     try {
-      const response = await axiosInstance.delete(`/delete/${uid}`, {
+      const response = await axiosInstance.delete(`/api/v1/user/delete/${uid}`, {
         headers: {
           Authorization: `Bearer ${authState.token}`,
         },
       });
 
-      if (response.status === 204) {
+      if (response.status === 200) {
         toast.success('회원탈퇴가 완료되었습니다.');
         setTimeout(() => {
           logout();

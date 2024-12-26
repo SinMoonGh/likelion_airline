@@ -6,8 +6,11 @@ from db.session import get_db
 from models.user import User
 from schemas.user import UserCreate, UserLogin
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 router = APIRouter()
+
+load_dotenv()
 
 # JWT 설정
 SECRET_KEY = os.getenv("SECRET_KEY")
@@ -55,6 +58,11 @@ async def login(user: UserLogin, db: Session = Depends(get_db)):
     return {
         "message": "로그인 성공",
         "token": token,
-        "user": db_user.lastName
+        "user": db_user.id
     }
 
+@router.delete("/delete/{uid}")
+async def delete_user(uid: int, db: Session = Depends(get_db)):
+    db.query(User).filter(User.id == uid).delete()
+    db.commit()
+    return None
