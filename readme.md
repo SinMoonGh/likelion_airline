@@ -3,9 +3,6 @@
 ### 항공편 예매 사이트
 - 참여 인원 : 2명
 - 프로젝트 기간 : 2024-12-24 ~ 2024-12-31
-- 프로젝트 언어 : JavaScript, Python
-- 프로젝트 프레임워크 : React, Django
-- 데이터베이스 : MySQL
 
 ## 핵심기능
 
@@ -17,6 +14,11 @@
 - 티켓 환불
 - 비밀번호 변경
 - 항공편 목록 조회
+
+## 기술 스택
+frontend : React, JavaScript
+
+backend : Python, Django, MySQL
 
 ## 요구사항
 
