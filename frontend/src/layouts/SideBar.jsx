@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useState, useContext } from 'react';
 import ConfirmPurchaseModal from '../components/ConfirmPurChaseModal';
 import { FlightInfoContext } from '../context/FlightInfoContext';
-import { AuthContext } from '../context/AuthContext'; 
+import { AuthContext } from '../context/AuthContext';
 
 const Container = styled.div`
   display: flex;
@@ -102,8 +102,8 @@ const BookButton = styled.button`
 `;
 
 const SideBar = ({ flight }) => {
-  const { purchaseTicket } = useContext(FlightInfoContext); 
-  const { authState } = useContext(AuthContext); 
+  const { purchaseTicket } = useContext(FlightInfoContext);
+  const { authState } = useContext(AuthContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -116,7 +116,7 @@ const SideBar = ({ flight }) => {
 
   const handleConfirmPurchase = async () => {
     try {
-      await purchaseTicket(flight.id, authState.user.id);
+      await purchaseTicket(flight.id, authState.user);
       handleCloseModal();
     } catch (error) {
       console.error('Failed to purchase ticket', error);
@@ -145,7 +145,7 @@ const SideBar = ({ flight }) => {
         <DetailRow>
           <Label>Arrival:</Label>
           <Value>
-            {flight.destination} at {flight.arrival_time}
+            {flight.destination} at {flight.destination_time}
           </Value>
         </DetailRow>
         <DetailRow>
@@ -155,6 +155,10 @@ const SideBar = ({ flight }) => {
         <DetailRow>
           <Label>Class:</Label>
           <Value>{flight.flightClass}</Value>
+        </DetailRow>
+        <DetailRow>
+          <Label>Price:</Label>
+          <Value>{flight.price.toLocaleString()}원</Value>
         </DetailRow>
         <DetailRow>
           <Label>Gate:</Label>
@@ -183,7 +187,7 @@ const SideBar = ({ flight }) => {
           <FacilityLabel>Entertainment</FacilityLabel>
         </Facility>
       </Facilities>
-      <BookButton onClick={handleOpenModal}>Book for $167</BookButton>
+      <BookButton onClick={handleOpenModal}>티켓 구매하기</BookButton>
       <ConfirmPurchaseModal
         open={isModalOpen}
         handleClose={handleCloseModal}

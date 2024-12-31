@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData, token) => {
-    console.log(userData);
     localStorage.setItem('token', token);
     localStorage.setItem('user', userData);
     setAuthState({
@@ -35,7 +34,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    // 오류 x
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuthState({

@@ -1,4 +1,4 @@
-import{ useContext } from 'react';
+import { useContext } from 'react';
 import { FlightInfoContext } from '../context/FlightInfoContext';
 
 const PurchaseButton = ({ flightId, userId }) => {

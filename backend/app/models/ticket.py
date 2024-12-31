@@ -19,4 +19,14 @@ class Ticket(Base):
     duration = Column(String(20), nullable=False)
     airline = Column(String(50), nullable=False)
     flightClass = Column(String(20), nullable=False)
-    price = Column(Integer, nullable=False) 
+    price = Column(Integer, nullable=False)
+
+
+class PurchaseTicket(Base):
+    __tablename__ = "purchase_tickets"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    userId = Column(Integer, ForeignKey("user.id"), nullable=False)
+    flightId = Column(Integer, ForeignKey("tickets.id"), nullable=False)
+    purchase_date = Column(String(20), nullable=False)
+    purchase_time = Column(String(10), nullable=False)
