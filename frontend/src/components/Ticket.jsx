@@ -199,8 +199,8 @@ const Ticket = forwardRef((props, ref) => {
       </Details>
 
       <PriceSection>
-        <Typography variant='h6'>USD {price}</Typography>
-        {isRefundable && (
+        <Typography variant='h6'>{price.toLocaleString()}원</Typography>
+        {true && (
           <>
             <Button
               variant='outlined'

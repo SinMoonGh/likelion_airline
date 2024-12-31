@@ -29,7 +29,7 @@ const Profile = () => {
 
   const handleRefund = async (ticketId) => {
     try {
-      await axiosInstance.post(`/tickets/${ticketId}/refund`, null, {
+      await axiosInstance.post(`/api/v1/tickets/refund/${ticketId}`, null, {
         headers: {
           Authorization: `Bearer ${authState.token}`,
         },

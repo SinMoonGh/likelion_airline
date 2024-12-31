@@ -71,3 +71,10 @@ async def get_user_tickets(userId: int, db: Session = Depends(get_db)):
         "currentPage": PAGE,
         "tickets": matching_tickets     
     }
+
+
+@router.post("/refund/{ticketId}")
+async def refund_ticket(ticketId: int, db: Session = Depends(get_db)):
+    db.query(PurchaseTicket).filter(PurchaseTicket.id == ticketId).delete()
+    db.commit()
+    return {"message": "티켓 환불 완료"}
