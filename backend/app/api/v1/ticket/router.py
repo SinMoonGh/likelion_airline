@@ -53,7 +53,21 @@ def existing_ticket(flightId: int, userId: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="이미 해당 티켓을 구매하셨습니다.")
 
 
-@router.get("/user")
-async def get_user_tickets(db: Session = Depends(get_db)):
-    user_tickets = db.query(PurchaseTicket).filter_by(userId=userId).all()
-    return user_tickets
+PAGE = 1
+LIMIT = 10
+@router.get("/user/{userId}")
+async def get_user_tickets(userId: int, db: Session = Depends(get_db)):
+    user_tickets = db.query(PurchaseTicket).filter(PurchaseTicket.userId == userId).all()
+    ticket_ids = [ticket.flightId for ticket in user_tickets]
+    matching_tickets_query = db.query(Ticket).filter(Ticket.id.in_(ticket_ids))
+
+    # 페이지네이션
+    total_items = matching_tickets_query.count()
+    total_pages = (total_items + LIMIT - 1) // LIMIT
+    matching_tickets = matching_tickets_query.offset((PAGE - 1) * LIMIT).limit(LIMIT).all()
+    return {
+        "totalItems": total_items,
+        "totalPages": total_pages,
+        "currentPage": PAGE,
+        "tickets": matching_tickets     
+    }
