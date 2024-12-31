@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from db.session import get_db
 from models.user import User
-from schemas.user import UserCreate, UserLogin
+from schemas.user import UserCreate, UserLogin, ChangePasswordRequest
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
@@ -66,3 +66,10 @@ async def delete_user(uid: int, db: Session = Depends(get_db)):
     db.query(User).filter(User.id == uid).delete()
     db.commit()
     return None
+
+
+@router.post("/change-password")
+async def change_password(request: ChangePasswordRequest, db: Session = Depends(get_db)):
+    db.query(User).filter(User.id == request.userId).update({"password": request.newPassword})
+    db.commit()
+    return {"message": "비밀번호 변경 완료"}

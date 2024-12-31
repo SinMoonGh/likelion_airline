@@ -4,8 +4,11 @@ import styled from '@emotion/styled';
 import { TextField, Button, Typography } from '@mui/material';
 import axiosInstance from '../api/axiosInstance';
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const PasswordChange = () => {
+  const { authState } = useContext(AuthContext);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -17,7 +20,8 @@ const PasswordChange = () => {
     }
 
     try {
-      await axiosInstance.post('/change-password', {
+      await axiosInstance.post('/api/v1/user/change-password', {
+        userId: authState.user,
         oldPassword,
         newPassword,
       });
