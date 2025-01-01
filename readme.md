@@ -18,7 +18,7 @@
 ## 기술 스택
 frontend : React, JavaScript
 
-backend : Python, Django, MySQL
+backend : Python, FastAPI, MySQL
 
 ## 요구사항
 
